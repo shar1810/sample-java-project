@@ -1,35 +1,20 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0">
-  <info organisation="com.nullprogram" module="sample-java-project"/>
-  <configurations>
-    <conf name="default"/>
-    <conf name="build" extends="default" visibility="private"/>
-    <conf name="test" extends="build" visibility="private"/>
-    <conf name="analysis" extends="build" visibility="private"/>
-  </configurations>
-  <dependencies>
-    <dependency org="com.beust" name="jcommander" rev="1.20"
-                conf="default"/>
+    <info organisation="com.odex" module="sample-java-project"/>
 
-    <!-- Build -->
-    <dependency org="org.projectlombok" name="lombok" rev="0.10.4"
-                conf="build->default"/>
+    <configurations>
+        <conf name="default"/>
+        <conf name="test" extends="default"/>
+    </configurations>
 
-    <!-- Unit Test -->
-    <dependency org="junit" name="junit" rev="4.10"
-                conf="test->default"/>
-    <dependency org="net.sourceforge.cobertura" name="cobertura" rev="1.9.4.1"
-                conf="test->default">
-      <exclude module="ant"/>
-    </dependency>
+    <dependencies>
 
-    <!-- Static Analysis -->
-    <dependency org="com.puppycrawl.tools" name="checkstyle" rev="5.5"
-                conf="analysis->default"/>
-    <dependency org="com.google.code.findbugs" name="findbugs" rev="2.0.0"
-                conf="analysis->default"/>
-        <!-- note: due to FindBugs BCEL conflict, list PMD last. -->
-    <dependency org="net.sourceforge.pmd" name="pmd" rev="5.0.0"
-                conf="analysis->default"/>
-  </dependencies>
+        <!-- Modern CLI parser (instead of old JCommander) -->
+        <dependency org="info.picocli" name="picocli" rev="4.7.5" conf="default"/>
+
+        <!-- Modern JUnit -->
+        <dependency org="org.junit.jupiter" name="junit-jupiter-api" rev="5.10.1" conf="test->default"/>
+        <dependency org="org.junit.jupiter" name="junit-jupiter-engine" rev="5.10.1" conf="test->default"/>
+
+    </dependencies>
 </ivy-module>
