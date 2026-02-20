@@ -1,21 +1,25 @@
 package sample.java.project;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import com.sun.net.httpserver.HttpServer;
 
-@WebServlet("/hello")
-public class SampleJavaProject extends HttpServlet {
+public class SampleJavaProject {
 
-    @Override
-    protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response)
-            throws ServletException, IOException {
+    public static void main(String[] args) throws IOException {
 
-        response.setContentType("text/html");
-        response.getWriter().println("<h2>Hello from JAR inside Tomcat!</h2>");
+        HttpServer server = HttpServer.create(new InetSocketAddress(8081), 0);
+
+        server.createContext("/", exchange -> {
+            String response = "Hello from Ant-built JAR Web App!";
+            exchange.sendResponseHeaders(200, response.length());
+            OutputStream os = exchange.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
+        });
+
+        server.start();
+        System.out.println("Server started at http://localhost:8081");
     }
 }
