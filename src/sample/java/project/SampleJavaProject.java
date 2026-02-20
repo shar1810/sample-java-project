@@ -17,6 +17,6 @@ public class SampleJavaProject extends HttpServlet {
             throws IOException {
 
         response.setContentType("text/html");
-        response.getWriter().println("<h2>Hello from JAR inside Tomcat! updated</h2>");
+        response.getWriter().println("<h2>Hello from JAR inside Tomcat!!!</h2>");
     }
 }
